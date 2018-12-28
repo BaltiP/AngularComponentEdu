@@ -1,0 +1,13 @@
+<div>
+  <button (click)="time.hour = time.hour - 1">h-</button> {{ time.hour }}
+  <button (click)="time.hour = time.hour + 1">h+</button>
+</div>
+
+<div>
+  <button (click)="decrementMinutes()">m-</button> {{ time.minutes }}
+  <button (click)="incrementMinutes()">m+</button>
+</div>
+
+<input [(ngModel)]="time.seconds" /> Input: {{ time.seconds }}
+
+<div>Gewählte Zeit: {{ getTimeString() }}</div>
