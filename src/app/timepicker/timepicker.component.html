@@ -1,13 +1,28 @@
 <div>
-  <button (click)="time.hour = time.hour - 1">h-</button> {{ time.hour }}
-  <button (click)="time.hour = time.hour + 1">h+</button>
+  <button (click)="time.hour = time.hour - 1; validateHour()">h-</button>
+  <button (click)="time.hour = time.hour + 1; validateHour()">h+</button>
+  {{ time.hour }}
 </div>
-
+<br />
 <div>
-  <button (click)="decrementMinutes()">m-</button> {{ time.minutes }}
-  <button (click)="incrementMinutes()">m+</button>
+  <button (click)="decrementMinutes()">m-</button>
+  <button on-click="incrementMinutes()">m+</button> {{ time.minutes }}
 </div>
+<br />
+<div>
+  Set Seconds: <input type="number" [(ngModel)]="time.seconds" /> <br />
+  <button (click)="time.seconds = time.seconds - 1">s-</button>
+  <button (click)="time.seconds = time.seconds + 1">s+</button>
+  <!-- In diesem Fall würde die CSS-Klasse "invalidInput" aktiviert werden, wenn die Sekundenanzahl 60 überschreitet. -->
+  <input
+    [attr.type]="'number'"
+    [class.invalidInput]="time.seconds > 60"
+    [value]="time.seconds"
+  />
+</div>
+<br />
+<br />
+<div [style.font-size.px]="28">Gewählte Zeit: {{ getTimeString() }}</div>
+<div *ngIf="!hourValid">Invalid time!</div>
 
-<input [(ngModel)]="time.seconds" /> Input: {{ time.seconds }}
-
-<div>Gewählte Zeit: {{ getTimeString() }}</div>
+<!-- Syntax zum Erzeugen eines Property-Bindings: -->
